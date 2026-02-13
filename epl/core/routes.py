@@ -4,4 +4,4 @@ core_bp = Blueprint('core', __name__, template_folder='templates')
 
 @core_bp.route('/')
 def index():
-    return render_template('core/index.html',title='Home Page')
+  return render_template('core/index.html', title='Home Page')
