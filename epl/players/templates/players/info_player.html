@@ -11,7 +11,7 @@
     <div class="row mb-3">
       <div class="col-md-4 mt-3">
         <div class="card">
-          <img src="{{players.}}" alt="" class="img-thumbnail p-5">
+          <img src="{{player.img}}" alt="" class="img-thumbnail p-5">
           <div>
             <h4 class="text-center text-success">
               Player Photo
@@ -23,7 +23,7 @@
         <div class="card">
           <div class="card-body">
             <div class="row">
-              <div class="col"><h2>Name</h2></div>
+              <div class="col"><h2>Player Name</h2></div>
               <div class="col"><h2 class="text-secondary float-end">{{player.name}}</h2></div>
             </div>
             <hr>
@@ -34,29 +34,46 @@
             <hr>
             <div class="row">
               <div class="col"><h2>Nationality</h2></div>
-              <div class="col"><h2 class="text-secondary float-end">{{player_nationality}}</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">{{player.nationality}}</h2></div>
             </div>
             <hr>
+            {% if player.position != 'Goalkeeper' %}
             <div class="row">
               <div class="col"><h2>Goals</h2></div>
-              <div class="col"><h2 class="text-secondary float-end">{{player_goals}}</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">{{player.goal}}</h2></div>
+            </div>
+            <hr>
+            {% endif %}
+
+            {% if player.position == 'Goalkeeper' %}
+            <div class="row">
+              <div class="col"><h2>Clean Sheets</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">
+                {{player.clean_sheets if player.clean_sheets is not none else 0}}
+              </h2></div>
+            </div>
+            <hr>
+            {% endif %}
+            <div class="row">
+              <div class="col"><h2>Squad Number</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">{{player.squad_no}}</h2></div>
             </div>
             <hr>
             <div class="row">
               <div class="col"><h2>Club</h2></div>
-              <div class="col"><h2 class="text-secondary float-end">{{player_club}}</h2></div>
+              <div class="col"><h2 class="text-secondary float-end">{{player.club.name}}</h2></div>
             </div>
             <hr>
             
             <div class="row mt-5">
               <div class="col">
-                <a href="{{url_for('player.index')}}" class="btn btn-outline-success">
+                <a href="{{url_for('players.index')}}" class="btn btn-outline-success">
                   <i class="bi bi-house-up-fill"></i>
                   Back to Player Page
                 </a>
               </div>
               <div class="col">
-                <a href="{{url_for('player_player',id=playerid)}}" class="float-end btn btn-outline-success">
+                <a href="{{url_for('players.update_player', id=player.id)}}" class="float-end btn btn-outline-success">
                   <i class="bi bi-house-up-fill"></i>
                   Edit Player
                 </a>
